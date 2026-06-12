@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aurum Dental — Perawatan Gigi Privat & Estetika Senyum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F7F4EC; --porcelain:#FCFAF4; --emerald:#10342B; --emerald-2:#1B4B3E;
+    --gold:#B79256; --gold-soft:#D9C49A; --ink:#1A1F1C; --muted:#5B665F; --line:#E3DCCB;
+    --serif:'Fraunces',Georgia,serif; --sans:'Inter',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--ivory);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3{font-family:var(--serif);font-weight:340;line-height:1.08;letter-spacing:-.01em}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+  .eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:600;display:inline-flex;align-items:center;gap:12px}
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold)}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* NAV */
+  header{position:fixed;top:0;width:100%;z-index:100;transition:.4s}
+  nav{display:flex;align-items:center;justify-content:space-between;padding:22px 28px;max-width:1200px;margin:0 auto;transition:.4s}
+  .brand{font-family:var(--serif);font-size:1.5rem;letter-spacing:.02em;color:var(--porcelain);transition:.4s}
+  .brand b{color:var(--gold);font-weight:400}
+  header.scrolled{background:var(--porcelain);box-shadow:0 1px 0 var(--line)}
+  header.scrolled nav{padding:16px 28px}
+  header.scrolled .brand{color:var(--emerald)}
+  .navlinks{display:flex;gap:38px;align-items:center}
+  .navlinks a{font-size:.86rem;color:rgba(252,250,244,.85);letter-spacing:.02em;transition:.3s;position:relative}
+  header.scrolled .navlinks a{color:var(--muted)}
+  .navlinks a:hover{color:var(--gold)}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:var(--emerald);padding:13px 26px;border-radius:2px;font-size:.84rem;font-weight:600;letter-spacing:.04em;transition:.35s;border:1px solid var(--gold)}
+  .btn:hover{background:transparent;color:var(--gold)}
+  header.scrolled .btn:hover{color:var(--emerald)}
+  .btn-ghost{background:transparent;border:1px solid rgba(252,250,244,.4);color:var(--porcelain)}
+  .btn-ghost:hover{background:var(--porcelain);color:var(--emerald);border-color:var(--porcelain)}
+  .menu-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+  .menu-toggle span{width:26px;height:2px;background:var(--porcelain);transition:.3s}
+  header.scrolled .menu-toggle span{background:var(--emerald)}
+
+  /* HERO */
+  .hero{position:relative;min-height:100vh;background:linear-gradient(150deg,#0C2A22 0%,#10342B 55%,#163E33 100%);color:var(--porcelain);display:flex;align-items:center;overflow:hidden}
+  .hero::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 30%,rgba(183,146,86,.16),transparent 50%);pointer-events:none}
+  .hero-arc{position:absolute;right:-12%;top:50%;transform:translateY(-50%);width:62vmin;height:62vmin;border:1px solid rgba(217,196,154,.35);border-radius:50%;pointer-events:none}
+  .hero-arc::before{content:"";position:absolute;inset:42px;border:1px solid rgba(217,196,154,.18);border-radius:50%}
+  .hero-arc::after{content:"";position:absolute;inset:84px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#1f5546,#10342b 70%);box-shadow:inset 0 0 60px rgba(0,0,0,.4)}
+  .hero-inner{position:relative;z-index:2;padding-top:90px;max-width:720px}
+  .hero h1{font-size:clamp(2.9rem,6.4vw,5.3rem);margin:26px 0 24px;color:var(--porcelain)}
+  .hero h1 em{font-style:italic;color:var(--gold-soft)}
+  .hero p{font-size:1.12rem;color:rgba(247,244,236,.82);max-width:480px;font-weight:300;margin-bottom:38px}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-meta{position:absolute;bottom:46px;left:28px;right:28px;max-width:1200px;margin:0 auto;display:flex;gap:54px;z-index:2}
+  .hero-meta .m b{font-family:var(--serif);font-size:2.2rem;color:var(--gold-soft);display:block;line-height:1}
+  .hero-meta .m span{font-size:.78rem;letter-spacing:.04em;color:rgba(247,244,236,.6)}
+
+  /* MARQUEE */
+  .trust{background:var(--emerald-2);color:rgba(247,244,236,.7);padding:18px 0;overflow:hidden;white-space:nowrap}
+  .trust-track{display:inline-flex;gap:60px;animation:scroll 28s linear infinite;font-size:.82rem;letter-spacing:.18em;text-transform:uppercase}
+  .trust-track span{color:var(--gold-soft)}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+
+  section{padding:120px 0}
+  .lead{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:64px}
+  .lead h2{font-size:clamp(2.1rem,4vw,3.3rem);color:var(--emerald)}
+  .lead p{color:var(--muted);font-size:1.05rem}
+
+  /* SERVICES */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+  .svc{background:var(--porcelain);padding:46px 38px;transition:.45s;position:relative}
+  .svc:hover{background:var(--emerald);color:var(--porcelain)}
+  .svc-num{font-family:var(--serif);font-size:.95rem;color:var(--gold);letter-spacing:.1em}
+  .svc h3{font-size:1.5rem;margin:22px 0 14px;color:var(--emerald);transition:.45s}
+  .svc:hover h3{color:var(--gold-soft)}
+  .svc p{font-size:.94rem;color:var(--muted);transition:.45s}
+  .svc:hover p{color:rgba(247,244,236,.78)}
+  .svc-arrow{margin-top:26px;font-size:1.3rem;color:var(--gold);opacity:0;transform:translateX(-8px);transition:.45s}
+  .svc:hover .svc-arrow{opacity:1;transform:none}
+
+  /* ABOUT split */
+  .about{background:var(--porcelain)}
+  .about-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:0;align-items:stretch}
+  .about-img{background:linear-gradient(145deg,#144034,#0C2A22);min-height:520px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+  .about-img .ring{width:64%;aspect-ratio:1;border-radius:50%;border:1px solid rgba(217,196,154,.4);position:relative;display:flex;align-items:center;justify-content:center}
+  .about-img .ring::after{content:"";position:absolute;inset:34px;border-radius:50%;border:1px solid rgba(217,196,154,.22)}
+  .about-img .tooth{font-family:var(--serif);font-size:8rem;color:var(--gold-soft);font-style:italic}
+  .about-txt{padding:84px 70px;display:flex;flex-direction:column;justify-content:center}
+  .about-txt h2{font-size:clamp(2rem,3.6vw,2.9rem);color:var(--emerald);margin:22px 0 26px}
+  .about-txt p{color:var(--muted);margin-bottom:20px}
+  .about-list{margin-top:14px;display:grid;gap:16px}
+  .about-list li{list-style:none;display:flex;gap:16px;align-items:flex-start;font-size:.96rem;color:var(--ink)}
+  .about-list .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);margin-top:9px;flex:none}
+
+  /* DOCTORS */
+  .doc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;margin-top:18px}
+  .doc{background:var(--porcelain);border:1px solid var(--line);transition:.4s}
+  .doc:hover{transform:translateY(-8px);box-shadow:0 24px 50px -28px rgba(16,52,43,.4)}
+  .doc-photo{aspect-ratio:4/5;background:linear-gradient(160deg,#1B4B3E,#0C2A22);display:flex;align-items:flex-end;justify-content:center;position:relative}
+  .doc-photo span{font-family:var(--serif);font-size:5rem;color:var(--gold-soft);opacity:.85;margin-bottom:-6px}
+  .doc-info{padding:26px 28px}
+  .doc-info h3{font-size:1.3rem;color:var(--emerald)}
+  .doc-info .role{font-size:.8rem;letter-spacing:.06em;color:var(--gold);text-transform:uppercase;margin:6px 0 10px}
+  .doc-info p{font-size:.88rem;color:var(--muted)}
+
+  /* TESTIMONIAL */
+  .quote{background:linear-gradient(150deg,#0C2A22,#10342B);color:var(--porcelain);text-align:center}
+  .quote .mark{font-family:var(--serif);font-size:6rem;color:var(--gold);line-height:.4;height:46px}
+  .quote blockquote{font-family:var(--serif);font-size:clamp(1.6rem,3.4vw,2.6rem);font-style:italic;font-weight:300;max-width:880px;margin:30px auto;color:var(--ivory)}
+  .quote cite{font-style:normal;font-size:.86rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)}
+
+  /* PRICING */
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:18px}
+  .price{background:var(--porcelain);border:1px solid var(--line);padding:44px 38px;transition:.4s;position:relative}
+  .price.feat{background:var(--emerald);color:var(--porcelain);transform:scale(1.03)}
+  .price.feat .price-amt,.price.feat h3{color:var(--gold-soft)}
+  .tag{position:absolute;top:-12px;left:38px;background:var(--gold);color:var(--emerald);font-size:.68rem;font-weight:600;letter-spacing:.12em;padding:5px 14px;text-transform:uppercase}
+  .price h3{font-size:1.4rem;color:var(--emerald)}
+  .price-amt{font-family:var(--serif);font-size:2.6rem;color:var(--emerald);margin:14px 0 6px}
+  .price-amt small{font-size:.9rem;color:var(--muted);font-family:var(--sans)}
+  .price ul{list-style:none;margin:24px 0;display:grid;gap:13px}
+  .price li{font-size:.9rem;display:flex;gap:11px;color:var(--muted)}
+  .price.feat li{color:rgba(247,244,236,.82)}
+  .price li::before{content:"✓";color:var(--gold);font-weight:600}
+
+  /* FAQ */
+  .faq-item{border-bottom:1px solid var(--line)}
+  .faq-q{padding:28px 0;display:flex;justify-content:space-between;gap:24px;cursor:pointer;align-items:center}
+  .faq-q h3{font-size:1.25rem;color:var(--emerald);font-family:var(--serif)}
+  .faq-q .ic{font-size:1.5rem;color:var(--gold);transition:.4s;flex:none}
+  .faq-item.open .ic{transform:rotate(45deg)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height .5s ease}
+  .faq-a p{padding:0 0 28px;color:var(--muted);max-width:760px}
+
+  /* BOOK */
+  .book{background:var(--porcelain)}
+  .book-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:70px;align-items:center}
+  .book h2{font-size:clamp(2rem,3.6vw,2.9rem);color:var(--emerald);margin:22px 0 20px}
+  .book p{color:var(--muted);margin-bottom:30px}
+  .book-info{display:grid;gap:22px;margin-top:30px}
+  .book-info div{display:flex;gap:16px;align-items:flex-start}
+  .book-info b{display:block;color:var(--emerald);font-family:var(--serif);font-size:1.05rem}
+  .book-info small{color:var(--muted);font-size:.9rem}
+  .book-info .ico{width:42px;height:42px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);flex:none}
+  form{background:var(--ivory);border:1px solid var(--line);padding:42px}
+  .field{margin-bottom:20px}
+  label{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+  input,select,textarea{width:100%;padding:14px 16px;border:1px solid var(--line);background:var(--porcelain);font-family:var(--sans);font-size:.95rem;color:var(--ink);transition:.3s;border-radius:2px}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  form .btn{width:100%;justify-content:center;margin-top:8px;cursor:pointer;font-size:.9rem}
+
+  /* FOOTER */
+  footer{background:var(--emerald);color:rgba(247,244,236,.7);padding:80px 0 34px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr;gap:40px;margin-bottom:54px}
+  footer h4{font-family:var(--serif);font-size:1.4rem;color:var(--porcelain);margin-bottom:18px}
+  footer .brand-f b{color:var(--gold)}
+  footer p{font-size:.9rem;max-width:280px}
+  footer ul{list-style:none;display:grid;gap:11px}
+  footer ul a{font-size:.9rem;transition:.3s}
+  footer ul a:hover{color:var(--gold-soft)}
+  .foot-bot{border-top:1px solid rgba(217,196,154,.2);padding-top:26px;display:flex;justify-content:space-between;font-size:.82rem;flex-wrap:wrap;gap:12px}
+  .foot-bot a{color:var(--gold-soft)}
+
+  @media(max-width:900px){
+    .navlinks{position:fixed;inset:0 0 0 auto;width:78%;max-width:340px;background:var(--emerald);flex-direction:column;justify-content:center;padding:40px;transform:translateX(100%);transition:.4s;gap:26px}
+    .navlinks.open{transform:none}
+    .navlinks a{color:var(--porcelain);font-size:1.1rem}
+    .menu-toggle{display:flex;z-index:101}
+    .lead,.about-grid,.book-grid,.field-row{grid-template-columns:1fr;gap:34px}
+    .svc-grid,.doc-grid,.price-grid,.foot-grid{grid-template-columns:1fr}
+    .about-txt{padding:54px 32px}
+    .price.feat{transform:none}
+    .hero-meta{gap:32px;flex-wrap:wrap}
+    section{padding:80px 0}
+  }
+</style>
+</head>
+<body>
+<header id="hd">
+  <nav>
+    <a href="#" class="brand">Aurum<b>.</b> Dental</a>
+    <div class="navlinks" id="nav">
+      <a href="#layanan">Layanan</a>
+      <a href="#tentang">Tentang</a>
+      <a href="#dokter">Dokter</a>
+      <a href="#harga">Biaya</a>
+      <a href="#kontak" class="btn">Buat Janji</a>
+    </div>
+    <button class="menu-toggle" id="mt"><span></span><span></span><span></span></button>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-arc"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow reveal">Klinik Gigi Privat · Jakarta Selatan</span>
+    <h1 class="reveal">Senyum yang dirawat<br><em>seperti karya seni.</em></h1>
+    <p class="reveal">Perawatan gigi presisi dengan teknologi digital dan sentuhan estetika. Setiap pasien ditangani satu dokter, dari konsultasi hingga hasil akhir.</p>
+    <div class="hero-cta reveal">
+      <a href="#kontak" class="btn">Jadwalkan Konsultasi →</a>
+      <a href="#layanan" class="btn btn-ghost">Lihat Layanan</a>
+    </div>
+  </div>
+  <div class="hero-meta">
+    <div class="m reveal"><b>12+</b><span>Tahun pengalaman</span></div>
+    <div class="m reveal"><b>9.000+</b><span>Senyum dirawat</span></div>
+    <div class="m reveal"><b>4.9★</b><span>Ulasan pasien</span></div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="trust-track">
+    <span>●</span> Digital Smile Design <span>●</span> Invisalign Provider <span>●</span> CEREC Same-Day Crown <span>●</span> Sterilisasi Kelas Bedah <span>●</span> Sedasi Sadar <span>●</span> Digital Smile Design <span>●</span> Invisalign Provider <span>●</span> CEREC Same-Day Crown <span>●</span> Sterilisasi Kelas Bedah <span>●</span> Sedasi Sadar
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="layanan">
+  <div class="wrap">
+    <div class="lead">
+      <div>
+        <span class="eyebrow reveal">Layanan Unggulan</span>
+        <h2 class="reveal" style="margin-top:20px">Perawatan menyeluruh,<br>dari fungsi hingga estetika.</h2>
+      </div>
+      <p class="reveal">Kami menggabungkan kedokteran gigi modern dengan pendekatan yang tenang dan tidak terburu-buru. Setiap rencana perawatan disusun khusus untuk Anda.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc reveal"><div class="svc-num">01</div><h3>Veneer & Estetika</h3><p>Veneer porselen dan bonding untuk bentuk, warna, dan keselarasan senyum yang natural.</p><div class="svc-arrow">→</div></div>
+      <div class="svc reveal"><div class="svc-num">02</div><h3>Invisalign & Ortho</h3><p>Perapian gigi tanpa kawat dengan aligner transparan, terpantau secara digital.</p><div class="svc-arrow">→</div></div>
+      <div class="svc reveal"><div class="svc-num">03</div><h3>Implan Gigi</h3><p>Penggantian gigi permanen dengan panduan bedah 3D untuk presisi dan kenyamanan.</p><div class="svc-arrow">→</div></div>
+      <div class="svc reveal"><div class="svc-num">04</div><h3>Pemutihan Gigi</h3><p>Whitening profesional in-office maupun take-home yang aman untuk enamel.</p><div class="svc-arrow">→</div></div>
+      <div class="svc reveal"><div class="svc-num">05</div><h3>Perawatan Saraf</h3><p>Endodontik dengan mikroskop untuk menyelamatkan gigi tanpa rasa nyeri berlebih.</p><div class="svc-arrow">→</div></div>
+      <div class="svc reveal"><div class="svc-num">06</div><h3>Gigi Anak</h3><p>Lingkungan ramah dan edukatif agar anak nyaman menjaga kesehatan giginya.</p><div class="svc-arrow">→</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="tentang" style="padding:0">
+  <div class="about-grid">
+    <div class="about-img">
+      <div class="ring"><span class="tooth">A</span></div>
+    </div>
+    <div class="about-txt">
+      <span class="eyebrow reveal">Tentang Aurum</span>
+      <h2 class="reveal">Filosofi kami sederhana: waktu, ketelitian, dan kepercayaan.</h2>
+      <p class="reveal">Berdiri sejak 2013, Aurum Dental dibangun untuk mereka yang menginginkan perawatan gigi tanpa rasa terburu-buru. Kami membatasi jumlah pasien per hari agar setiap kunjungan terasa personal.</p>
+      <ul class="about-list">
+        <li class="reveal"><span class="dot"></span><div>Satu dokter menangani Anda dari awal sampai akhir — bukan estafet antar staf.</div></li>
+        <li class="reveal"><span class="dot"></span><div>Pemindaian intraoral digital, tanpa cetakan konvensional yang mengganggu.</div></li>
+        <li class="reveal"><span class="dot"></span><div>Protokol sterilisasi setara ruang bedah, diawasi dan tercatat.</div></li>
+        <li class="reveal"><span class="dot"></span><div>Estimasi biaya transparan sebelum perawatan dimulai.</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section id="dokter">
+  <div class="wrap">
+    <div class="lead">
+      <div>
+        <span class="eyebrow reveal">Tim Dokter</span>
+        <h2 class="reveal" style="margin-top:20px">Ditangani spesialis<br>yang Anda kenal namanya.</h2>
+      </div>
+      <p class="reveal">Setiap dokter di Aurum memiliki bidang fokus tersendiri, sehingga Anda dirujuk pada ahli yang tepat.</p>
+    </div>
+    <div class="doc-grid">
+      <div class="doc reveal"><div class="doc-photo"><span>RW</span></div><div class="doc-info"><h3>drg. Renata Wijaya, Sp.KG</h3><div class="role">Konservasi & Estetika</div><p>Spesialis veneer dan smile design dengan lebih dari 3.000 kasus estetika.</p></div></div>
+      <div class="doc reveal"><div class="doc-photo"><span>AH</span></div><div class="doc-info"><h3>drg. Adrian Halim, Sp.BM</h3><div class="role">Bedah Mulut & Implan</div><p>Fokus pada implan gigi dengan panduan bedah digital 3D.</p></div></div>
+      <div class="doc reveal"><div class="doc-photo"><span>SP</span></div><div class="doc-info"><h3>drg. Salma Pranata, Sp.Ort</h3><div class="role">Ortodonti & Invisalign</div><p>Certified Invisalign provider untuk kasus perapian kompleks.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <div class="wrap">
+    <div class="mark">"</div>
+    <blockquote class="reveal">Pertama kalinya saya tidak cemas duduk di kursi dokter gigi. Semuanya dijelaskan pelan-pelan, dan hasil veneer saya terlihat sangat natural.</blockquote>
+    <cite class="reveal">— Anindya R., pasien sejak 2021</cite>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="harga">
+  <div class="wrap">
+    <div class="lead">
+      <div>
+        <span class="eyebrow reveal">Paket Perawatan</span>
+        <h2 class="reveal" style="margin-top:20px">Transparan,<br>tanpa biaya kejutan.</h2>
+      </div>
+      <p class="reveal">Harga mulai dari, sebagai gambaran awal. Estimasi final disampaikan setelah pemeriksaan langsung.</p>
+    </div>
+    <div class="price-grid">
+      <div class="price reveal">
+        <h3>Pemeriksaan</h3>
+        <div class="price-amt">Rp250<small>rb</small></div>
+        <ul><li>Konsultasi & pemeriksaan</li><li>Foto rontgen panoramik</li><li>Pembersihan karang gigi</li><li>Rencana perawatan tertulis</li></ul>
+        <a href="#kontak" class="btn" style="width:100%;justify-content:center">Pilih Paket</a>
+      </div>
+      <div class="price feat reveal">
+        <span class="tag">Paling Diminati</span>
+        <h3>Smile Makeover</h3>
+        <div class="price-amt">Rp3,5<small>jt / gigi</small></div>
+        <ul><li>Desain senyum digital</li><li>Veneer porselen premium</li><li>Penyesuaian warna presisi</li><li>Garansi & kontrol berkala</li></ul>
+        <a href="#kontak" class="btn" style="width:100%;justify-content:center;background:var(--gold-soft);border-color:var(--gold-soft)">Pilih Paket</a>
+      </div>
+      <div class="price reveal">
+        <h3>Implan Gigi</h3>
+        <div class="price-amt">Rp12<small>jt / unit</small></div>
+        <ul><li>Panduan bedah 3D</li><li>Implan grade medis</li><li>Mahkota porselen</li><li>Kontrol pasca-operasi</li></ul>
+        <a href="#kontak" class="btn" style="width:100%;justify-content:center">Pilih Paket</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="about" style="background:var(--porcelain)">
+  <div class="wrap">
+    <span class="eyebrow reveal">Pertanyaan Umum</span>
+    <h2 class="reveal" style="color:var(--emerald);font-size:clamp(2rem,3.6vw,2.9rem);margin:20px 0 40px">Hal yang sering ditanyakan.</h2>
+    <div class="faq">
+      <div class="faq-item reveal"><div class="faq-q"><h3>Apakah perawatan terasa sakit?</h3><span class="ic">+</span></div><div class="faq-a"><p>Kami menggunakan anestesi lokal modern dan, bila perlu, sedasi sadar. Mayoritas pasien melaporkan rasa nyaman selama dan setelah prosedur.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-q"><h3>Berapa lama proses veneer?</h3><span class="ic">+</span></div><div class="faq-a"><p>Umumnya 2–3 kali kunjungan dalam 1–2 minggu, mulai dari desain digital, pemasangan sementara, hingga veneer permanen.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-q"><h3>Apakah bisa cicilan?</h3><span class="ic">+</span></div><div class="faq-a"><p>Ya. Kami menyediakan skema cicilan 0% untuk paket tertentu serta menerima sebagian besar asuransi kesehatan.</p></div></div>
+      <div class="faq-item reveal"><div class="faq-q"><h3>Bagaimana jika saya takut ke dokter gigi?</h3><span class="ic">+</span></div><div class="faq-a"><p>Sampaikan saat membuat janji. Kami menyiapkan sesi pengenalan tanpa tindakan agar Anda merasa tenang lebih dulu.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section class="book" id="kontak">
+  <div class="wrap">
+    <div class="book-grid">
+      <div>
+        <span class="eyebrow reveal">Buat Janji</span>
+        <h2 class="reveal">Mari mulai dengan satu konsultasi.</h2>
+        <p class="reveal">Isi formulir dan tim kami akan menghubungi untuk mengonfirmasi jadwal dalam 1×24 jam kerja.</p>
+        <div class="book-info">
+          <div class="reveal"><div class="ico">✆</div><div><b>+62 21 5000 1234</b><small>Senin–Sabtu, 09.00–20.00 WIB</small></div></div>
+          <div class="reveal"><div class="ico">⌖</div><div><b>Jl. Senopati No. 88, Jakarta Selatan</b><small>Basement parking tersedia</small></div></div>
+          <div class="reveal"><div class="ico">✦</div><div><b>WhatsApp 24 Jam</b><small>Untuk keadaan darurat gigi</small></div></div>
+        </div>
+      </div>
+      <form onsubmit="submitForm(event)" class="reveal">
+        <div class="field"><label>Nama Lengkap</label><input required placeholder="Nama Anda"></div>
+        <div class="field-row">
+          <div class="field"><label>No. WhatsApp</label><input required placeholder="08xx"></div>
+          <div class="field"><label>Tanggal Diinginkan</label><input type="date"></div>
+        </div>
+        <div class="field"><label>Jenis Perawatan</label>
+          <select><option>Konsultasi umum</option><option>Veneer / Estetika</option><option>Invisalign</option><option>Implan</option><option>Pemutihan</option></select>
+        </div>
+        <div class="field"><label>Keluhan (opsional)</label><textarea rows="3" placeholder="Ceritakan singkat keluhan Anda"></textarea></div>
+        <button class="btn" type="submit">Kirim Permintaan Janji →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4 class="brand-f">Aurum<b>.</b> Dental</h4>
+        <p>Klinik gigi privat yang mengutamakan ketelitian, kenyamanan, dan estetika senyum yang natural.</p>
+      </div>
+      <div><h4 style="font-size:.95rem;font-family:var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)">Layanan</h4><ul><li><a href="#layanan">Veneer</a></li><li><a href="#layanan">Invisalign</a></li><li><a href="#layanan">Implan</a></li><li><a href="#layanan">Pemutihan</a></li></ul></div>
+      <div><h4 style="font-size:.95rem;font-family:var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)">Klinik</h4><ul><li><a href="#tentang">Tentang</a></li><li><a href="#dokter">Dokter</a></li><li><a href="#harga">Biaya</a></li><li><a href="#kontak">Kontak</a></li></ul></div>
+      <div><h4 style="font-size:.95rem;font-family:var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-soft)">Kunjungi</h4><p>Jl. Senopati No. 88<br>Jakarta Selatan 12190<br>+62 21 5000 1234</p></div>
+    </div>
+    <div class="foot-bot">
+      <span>© 2026 Aurum Dental. Hak cipta dilindungi.</span>
+      <span>Dirancang oleh <a href="https://clinova-bay.vercel.app">Clinova</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const hd=document.getElementById('hd');
+  addEventListener('scroll',()=>hd.classList.toggle('scrolled',scrollY>40));
+  const mt=document.getElementById('mt'),nav=document.getElementById('nav');
+  mt.onclick=()=>nav.classList.toggle('open');
+  nav.querySelectorAll('a').forEach(a=>a.onclick=()=>nav.classList.remove('open'));
+  document.querySelectorAll('.faq-item').forEach(it=>{
+    it.querySelector('.faq-q').onclick=()=>{
+      const open=it.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(x=>{x.classList.remove('open');x.querySelector('.faq-a').style.maxHeight=null});
+      if(!open){it.classList.add('open');it.querySelector('.faq-a').style.maxHeight=it.querySelector('.faq-a').scrollHeight+'px'}
+    };
+  });
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%4*60)+'ms';io.observe(el)});
+  function submitForm(e){e.preventDefault();const b=e.target.querySelector('button');b.textContent='Permintaan Terkirim ✓';b.style.background='var(--gold-soft)';setTimeout(()=>e.target.reset(),400)}
+</script>
+</body>
+</html>
